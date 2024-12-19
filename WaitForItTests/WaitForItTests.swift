@@ -8,10 +8,20 @@
 import Testing
 @testable import WaitForIt
 
+
+// https://www.avanderlee.com/concurrency/unit-testing-async-await/
+
 struct WaitForItTests {
 
-    @Test func example() async throws {
-        // Write your test here and use APIs like `#expect(...)` to check expected conditions.
+    @Test func getJoke() async throws {
+        let sut = JokeService()
+        
+        let task = Task {
+            try await sut.fetchJoke()
+        }
+        
+        // https://www.swiftwithvincent.com/blog/how-to-get-started-with-swift-testing
+        await #expect(task.result != nil)
     }
 
 }
