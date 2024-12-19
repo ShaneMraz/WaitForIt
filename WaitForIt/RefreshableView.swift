@@ -15,12 +15,14 @@ struct RefreshableView: View {
             Text("Chuck Norris Joke")
                 .font(.largeTitle)
                 .listRowSeparator(.hidden)
+                .accessibility(identifier: "jokeTitle")
             Text(jokeService.joke)
                 .multilineTextAlignment(.center)
                 .lineLimit(nil)
                 .lineSpacing(5.0)
                 .padding()
                 .font(.title)
+                .accessibility(identifier: "jokeContent")
         }
         .task {
             try? await jokeService.fetchJoke()
